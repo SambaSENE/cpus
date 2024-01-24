@@ -3,13 +3,19 @@ require "./Models/CpuModel.php";
 $cpu = new CpuModel("cpu_intel");
 
 if (isset($_POST)) {
-    if (!empty($_POST["family"]) && !empty($_POST["model"]) && !empty($_POST["frequence"])) {
-        $cpu->create($_POST["family"], $_POST["model"], intval($_POST["frequence"]));
+    if (!empty($_POST["family"]) && !empty($_POST["model"]) && !empty(intval($_POST["frequence"]))) {
+        
+        if(intval($_POST['frequence']) < 1600 || intval($_POST['frequence']) > 5000){
+
+            $cpu->create($_POST["family"], $_POST["model"], intval($_POST["frequence"]));
+        }else {
+            echo "saisie invalide";
+        }
     } else {
         echo "Tous les champs sont obligatoires";
     }
 }
-
+var_dump($_POST['family']);
 ?>
 <!DOCTYPE html>
 <html lang="fr-be">
@@ -31,7 +37,12 @@ if (isset($_POST)) {
             <fieldset>
                 <div>
                     <label for="family">Famille</label>
-                    <input type="text" name="family" id="family">
+                    <select name="family" id="family">
+                        <option value="">--</option>
+                        <option value="i5">I5</option>
+                        <option value="i7">I7</option>
+                        <option value="i9">I9</option>
+                    </select>
                 </div>
                 <div>
                     <label for="model">Modèle</label>
