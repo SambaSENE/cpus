@@ -6,7 +6,7 @@ if (isset($_POST)) {
     if (!empty($_POST["family"]) && !empty($_POST["model"]) && !empty($_POST["frequence"])) {
         $cpu->create($_POST["family"], $_POST["model"], intval($_POST["frequence"]));
     } else {
-        echo "Tous les sont obligatoires";
+        echo "Tous les champs sont obligatoires";
     }
 }
 
